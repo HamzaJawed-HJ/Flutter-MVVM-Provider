@@ -6,8 +6,8 @@ import 'package:mvvm_project/utlis/utlis.dart';
 import 'package:mvvm_project/viewModel/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-class Loginscreen extends StatelessWidget {
-  Loginscreen({super.key});
+class Signupscreen extends StatelessWidget {
+  Signupscreen({super.key});
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -17,7 +17,6 @@ class Loginscreen extends StatelessWidget {
 
   ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
 
-//IN STATELESS CLASS THERE IS NO INITSTATE OR DISPOSE
   // @override
   // void dispose() {
   //   _emailController.dispose();
@@ -34,7 +33,7 @@ class Loginscreen extends StatelessWidget {
     final AuthViewModelProvider = Provider.of<AuthViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login Screen"),
+        title: Text("SignUp Screen"),
         centerTitle: true,
         backgroundColor: AppColors.lightBlueColor.withOpacity(.7),
       ),
@@ -87,7 +86,7 @@ class Loginscreen extends StatelessWidget {
               height: 50,
             ),
             ButtonWidget(
-                title: "Login",
+                title: "SignUp",
                 isLoading: AuthViewModelProvider.isLoading,
                 onTap: () {
                   if (_emailController.text.isEmpty) {
@@ -100,7 +99,7 @@ class Loginscreen extends StatelessWidget {
                       'password': _passwordController.text.toString()
                     };
 
-                    AuthViewModelProvider.loginApi(data, context);
+                    AuthViewModelProvider.signUpApi(data, context);
                   }
                 }),
             SizedBox(
@@ -108,10 +107,10 @@ class Loginscreen extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, RoutesName.signUpScreen);
+                Navigator.pushNamed(context, RoutesName.loginScreen);
               },
               child: Center(
-                child: Text("Dont Have an account! SignUp"),
+                child: Text("Already Have an account! Let's Login"),
               ),
             )
           ],

@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:nativewrappers/_internal/vm/lib/convert_patch.dart';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:mvvm_project/data/app_exceptions.dart';
@@ -12,7 +10,8 @@ class NetworkApiServices extends BaseApiServices {
   Future getApiResponse(String url) async {
     dynamic responseJson;
     try {
-      final response = await http.get(Uri.parse(url));
+      final response =
+          await http.get(Uri.parse(url)).timeout(Duration(seconds: 3));
       responseJson = checkReturnResponse(response);
     } on SocketException {
       throw FetchDataExcaeption("No Internet ");
@@ -24,11 +23,13 @@ class NetworkApiServices extends BaseApiServices {
   Future postApiResponse(String url, dynamic data) async {
     dynamic responseJson;
     try {
-      final response = await http.post(
-          Uri.parse(
-            url,
-          ),
-          body: data);
+      final response = await http
+          .post(
+              Uri.parse(
+                url,
+              ),
+              body: data)
+          .timeout(Duration(seconds: 3));
       responseJson = checkReturnResponse(response);
     } on SocketException {
       throw FetchDataExcaeption("No Internet ");
