@@ -5,10 +5,10 @@ import 'package:mvvm_project/repository/auth_repository.dart';
 import 'package:mvvm_project/utlis/routes/routesName.dart';
 import 'package:mvvm_project/utlis/utlis.dart';
 import 'package:mvvm_project/viewModel/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 class AuthViewModel with ChangeNotifier {
   final authRepository = AuthRepository();
-  final userViewModel = UserViewModel();
 
   bool isLoading = false;
 
@@ -30,10 +30,14 @@ class AuthViewModel with ChangeNotifier {
     authRepository.loginApi(data).then(
       (value) {
         setLoading(false);
+
+        final userPreference =
+            Provider.of<UserViewModel>(context, listen: false);
+        userPreference.saveUser(UserModel(token: value['token'].toString()));
+
         Utiles.snackBar(
             "Login Sucessful & Token: ${value.toString()}", context);
         Navigator.pushNamed(context, RoutesName.homeScreen);
-        userViewModel.saveUser(value.toString());
 
         if (kDebugMode) {
           print(

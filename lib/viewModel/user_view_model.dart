@@ -3,9 +3,9 @@ import 'package:mvvm_project/data/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserViewModel extends ChangeNotifier {
-  Future<bool> saveUser(String value) async {
-    UserModel user = UserModel();
-    user.token = value;
+  Future<bool> saveUser(UserModel user ) async {
+    
+    
     SharedPreferences sharedPreference = await SharedPreferences.getInstance();
 
     sharedPreference.setString('token', user.token.toString());

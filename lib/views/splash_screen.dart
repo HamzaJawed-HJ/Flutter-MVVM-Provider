@@ -23,7 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [Text("Splash Screen")],
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center( 
+            child: Text(
+              "Splash Screen",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ),
+        ],
       ),
     );
   }

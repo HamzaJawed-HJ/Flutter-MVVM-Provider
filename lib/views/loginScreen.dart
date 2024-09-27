@@ -30,7 +30,6 @@ class _LoginscreenState extends State<Loginscreen> {
   @override
   Widget build(BuildContext context) {
     final authViewModelProvider = Provider.of<AuthViewModel>(context);
-    final userViewModelProvider = Provider.of<UserViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Login Screen"),
