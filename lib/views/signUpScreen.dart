@@ -95,9 +95,14 @@ class Signupscreen extends StatelessWidget {
                     Utiles.snackBar("Please Enter Password", context);
                   } else {
                     Map data = {
-                      'email': _emailController.text.toString(),
-                      'password': _passwordController.text.toString()
+                      "email": "eve.holt@reqres.in",
+                      "password": "pistol"
                     };
+
+                    // Map data = {
+                    //   'email': _emailController.text.toString(),
+                    //   'password': _passwordController.text.toString()
+                    // };
 
                     AuthViewModelProvider.signUpApi(data, context);
                   }

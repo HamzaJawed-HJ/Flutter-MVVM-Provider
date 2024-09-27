@@ -24,7 +24,9 @@ class ButtonWidget extends StatelessWidget {
         ),
         child: Center(
           child: isLoading
-              ? CircularProgressIndicator()
+              ? CircularProgressIndicator(
+                  color: Colors.white,
+                )
               : Text(
                   title,
                   style: TextStyle(

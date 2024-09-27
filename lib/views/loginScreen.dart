@@ -4,34 +4,33 @@ import 'package:mvvm_project/resources/widgets/button_widget.dart';
 import 'package:mvvm_project/utlis/routes/routesName.dart';
 import 'package:mvvm_project/utlis/utlis.dart';
 import 'package:mvvm_project/viewModel/auth_view_model.dart';
+import 'package:mvvm_project/viewModel/user_view_model.dart';
 import 'package:provider/provider.dart';
 
-class Loginscreen extends StatelessWidget {
+class Loginscreen extends StatefulWidget {
   Loginscreen({super.key});
 
+  @override
+  State<Loginscreen> createState() => _LoginscreenState();
+}
+
+class _LoginscreenState extends State<Loginscreen> {
   TextEditingController _emailController = TextEditingController();
+
   TextEditingController _passwordController = TextEditingController();
 
   FocusNode emailFocusNode = FocusNode();
+
   FocusNode passwordFocusNode = FocusNode();
 
   ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
 
 //IN STATELESS CLASS THERE IS NO INITSTATE OR DISPOSE
-  // @override
-  // void dispose() {
-  //   _emailController.dispose();
-  //   _passwordController.dispose();
-
-  //   _obsecurePassword.dispose();
-
-  //   emailFocusNode.dispose();
-  //   passwordFocusNode.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
-    final AuthViewModelProvider = Provider.of<AuthViewModel>(context);
+    final authViewModelProvider = Provider.of<AuthViewModel>(context);
+    final userViewModelProvider = Provider.of<UserViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Login Screen"),
@@ -47,6 +46,7 @@ class Loginscreen extends StatelessWidget {
             TextFormField(
               controller: _emailController,
               focusNode: emailFocusNode,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: 'Email',
                 hintText: 'Email',
@@ -87,22 +87,32 @@ class Loginscreen extends StatelessWidget {
               height: 50,
             ),
             ButtonWidget(
-                title: "Login",
-                isLoading: AuthViewModelProvider.isLoading,
-                onTap: () {
-                  if (_emailController.text.isEmpty) {
-                    Utiles.snackBar("Please Enter Email", context);
-                  } else if (_passwordController.text.isEmpty) {
-                    Utiles.snackBar("Please Enter Password", context);
-                  } else {
-                    Map data = {
-                      'email': _emailController.text.toString(),
-                      'password': _passwordController.text.toString()
-                    };
+              title: "Login",
+              isLoading: authViewModelProvider.isLoading,
+              onTap: () {
+                if (_emailController.text.isEmpty) {
+                  Utiles.snackBar("Please Enter Email", context);
+                } else if (_passwordController.text.isEmpty) {
+                  Utiles.snackBar("Please Enter Password", context);
+                } else {
+                  Map data = {
+                    "email": "eve.holt@reqres.in",
+                    "password": "cityslicka"
+                  };
 
-                    AuthViewModelProvider.loginApi(data, context);
-                  }
-                }),
+                  // Map data = {
+                  //   'email': _emailController.text.toString(),
+                  //   'password': _passwordController.text.toString()
+                  // };
+
+                  authViewModelProvider.loginApi(data, context);
+
+                  // userViewModelProvider.saveUser;
+
+                  print('Api hit');
+                }
+              },
+            ),
             SizedBox(
               height: 50,
             ),

@@ -1,7 +1,7 @@
 class AppUrls {
-  static String baseUrl = 'https//reqres.in';
+  static String baseUrl = 'https://reqres.in';
 
   static String loginEndpoint = baseUrl + '/api/login';
 
-  static String registerEndPoint = baseUrl + 'api/register';
+  static String registerEndPoint = baseUrl + '/api/register';
 }
