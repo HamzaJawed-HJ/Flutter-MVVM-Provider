@@ -14,10 +14,13 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> movieListApi() async {
-    homeRepository.fetchMovieList().then((val) {
+    await homeRepository.fetchMovieList().then((val) {
       setMovieList(ApiResponse.completed(val));
+      print("API HITING " + val.toString());
     }).onError((error, stackTrace) {
       ApiResponse.error(error.toString());
+
+      print("API NOT HITTING "+error.toString());
     });
   }
 }

@@ -13,19 +13,19 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  HomeViewModel homeViewModel = HomeViewModel();
+  // HomeViewModel homeViewModel = HomeViewModel();
 
   @override
   void initState() {
-    homeViewModel.movieListApi();
     super.initState();
+
+    Provider.of<HomeViewModel>(context, listen: false).movieListApi();
+    print("init start");
   }
 
   @override
   Widget build(BuildContext context) {
-    final userViewModelProvider = Provider.of<UserViewModel>(
-      context,
-    );
+    final userViewModelProvider = Provider.of<UserViewModel>(context);
 
     return Scaffold(
         appBar: AppBar(
